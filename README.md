@@ -10,3 +10,10 @@ should go in the `src/` directory in the files provided. All your
 functions should be namespaced under `Assessment`.
 
 How to run the specs: open up `SpecRunner.html` in a browser.
+
+# How to Contribute
+Clone repository.
+Add in or modify tests to `spec/js_assessment_spec.js`.
+Add solutions to `solutions/js_assessment.js`.
+Run `SpecRunner-Solutions.html` and make sure all tests pass.
+Push or add pull request to origin.
