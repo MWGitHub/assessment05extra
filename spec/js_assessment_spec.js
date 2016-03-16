@@ -16,4 +16,23 @@ describe("Array.prototype", function () {
       }), [2, 4]);
     });
   });
+
+  describe("quickSort", function () {
+    it("should sort an array", function () {
+      expect([5, 3, 6, 8, 9, 4, 3, 1].quickSort(function (pivotEl, el) {
+        if (el > pivotEl) {
+          return -1;
+        } else if (el < pivotEl) {
+          return 1;
+        } else {
+          return 0;
+        }
+      })).toEqual([9, 8, 6, 5, 4, 3, 3, 1]);
+    });
+
+    it("should sort an array without a comparator given", function () {
+      expect([5, 3, 6, 8, 9, 4, 3, 1].quickSort()).
+        toEqual([1, 3, 3, 4, 5, 6, 8, 9]);
+    });
+  });
 });
