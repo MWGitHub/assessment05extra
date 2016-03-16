@@ -186,38 +186,40 @@
     }
   };
 
-  Assessment.makeChange = function (val, coins) {
-    if (val === 0) return [];
+  Assessment.makeChange = function (target, coins) {
+		if (target === 0) {
+	    return [];
+	  }
 
-    var coin = coins[0];
-    var newVal;
+	  var bestChange = null;
 
-    var result = [];
-    if (coins.length === 1) {
-      if (coin > val) return null;
-      newVal = val - coin;
-      result.push(coin);
-      return result.concat(Assessment.makeChange(newVal, coins));
-    }
+	  function reverseSorter(a, b) {
+	    if (a < b) {
+	      return 1;
+	    } else if (a > b) {
+	      return -1;
+	    } else {
+	      return 0;
+	    }
+	  }
 
-    var least = null;
-    var copy = [].concat(coins);
-    for (var i = 0; i < coins.length; ++i) {
-      coin = copy.shift();
-      result = [];
-      newVal = val;
-      if (coin <= val) {
-        for (var j = 0; j < Math.floor(val / coin); ++j) {
-          result.push(coin);
-        }
-        newVal = val % coin;
-      }
-      result = result.concat(Assessment.makeChange(newVal, [].concat(copy)));
-      if (least === null || result.length < least.length) {
-        least = result;
-      }
-    }
-    return least;
+	  coins.sort(reverseSorter).forEach(function(coin, index) {
+	    if (coin > target) {
+	      return;
+	    }
+
+	    var remainder = target - coin;
+	    // remember the optimization where we don't try to use high coins
+	    // if we're already using a low one?
+	    var restChange = Assessment.makeChange(remainder, coins.slice(index));
+
+	    var change = [coin].concat(restChange);
+	    if (!bestChange || (change.length < bestChange.length)) {
+	      bestChange = change;
+	    }
+	  });
+
+	  return bestChange;
   };
 
   Array.prototype.mergeSort = function () {
