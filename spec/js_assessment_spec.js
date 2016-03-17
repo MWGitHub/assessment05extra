@@ -149,3 +149,14 @@ describe('String.prototype', function () {
     });
   });
 });
+
+describe('Function.prototype', function () {
+	describe('curry', function() {
+    it("should sum numbers", function() {
+			var sum = function (one, two, three) {
+				return one + two + three;
+			};
+			expect(sum.curry(3)(4)(20)(6)).toEqual(30);
+    });
+  });
+});

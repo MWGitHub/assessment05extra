@@ -236,6 +236,20 @@
     return result;
   };
 
+	Function.prototype.curry = function (length) {
+		var fn = this;
+		var bank = [];
+
+		var innerFunc = function (arg) {
+			if (bank.length === length) return fn.apply(fn, arg);
+			bank.push(arg);
+			if (bank.length === length) return fn.apply(fn, bank);
+			return innerFunc;
+		};
+
+		return innerFunc;
+	};
+
   Array.prototype.quickSort = function (callback) {
     if (this.length <= 1) return this;
     defaultCallback = callback || function (el, pivotEl) {
