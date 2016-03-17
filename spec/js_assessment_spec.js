@@ -177,6 +177,17 @@ describe("Array.prototype", function () {
 	    expect([1, 3, 4, 5].dups()).toEqual({});
 	  });
 	});
+
+	describe('myReject', function () {
+		it('creates a new array containing excluding the elements', function () {
+			expect([1, 2, 3].myReject(function (el) {
+				return el > 1;
+			})).toEqual([1]);
+			expect([1, 2, 3].myReject(function (el) {
+				return el > 4;
+			})).toEqual([1, 2, 3]);
+		});
+	});
 });
 
 describe("Assessment", function () {
@@ -280,7 +291,7 @@ describe('String.prototype', function () {
 	});
 
 	describe("symmetricSubstrings", function () {
-	  it("handles a simple example", function () {
+	  it("handles a simple example and excludes length less than 3", function () {
 	    expect("aba".symmetricSubstrings().indexOf('aba') >= 0).toEqual(true);
 	  });
 
@@ -296,6 +307,21 @@ describe('String.prototype', function () {
 			expect(result.indexOf('xabax') >= 0).toEqual(true);
 	  });
 	});
+
+	// describe("anagramSubstrings", function () {
+	//   it("handles a simple example and excludes length less than 3", function () {
+	// 		var result = "aba".anagramSubstrings();
+	//     expect(result.indexOf('aba') >= 0).toEqual(true);
+	// 		expect(result.length).toEqual(1);
+	//   });
+	//
+	//   it("handles two substrings and includes only the first found anagrams", function () {
+	// 		var result = "abadcc1cabadc".anagramSubstrings();
+	//     expect(result.indexOf('aba') >= 0).toEqual(true);
+	// 		expect(result.indexOf('dcc') >= 0).toEqual(true);
+	// 		expect(result.length).toEqual(2);
+	//   });
+	// });
 });
 
 describe('Function.prototype', function () {

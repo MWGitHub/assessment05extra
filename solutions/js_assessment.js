@@ -185,6 +185,14 @@
 		return result;
 	};
 
+	Array.prototype.myReject = function (callback) {
+		var result = [];
+		for (var i = 0; i < this.length; i++) {
+			if (!callback(this[i])) result.push(this[i]);
+		}
+		return result;
+	};
+
   Assessment.myTranspose = function (array) {
     var result = [];
 
@@ -311,22 +319,6 @@
 					opposite += sub[i];
 				}
 				if (sub === opposite) result.push(sub);
-			}
-		}
-		return result;
-	};
-
-	String.prototype.substringAnagrams = function () {
-		var result = [];
-		var minLength = 3;
-		for (var start = 0; start < this.length - minLength; start++) {
-			for (var end = start + minLength; end < this.length; end++) {
-				var sub = this.substring(start, end + 1);
-				console.log(sub);
-				for (var innerEnd = end; innerEnd < this.length; innerEnd++) {
-					var opposite = this.substring(innerEnd, end + sub.length);
-					if (sub === opposite) result.push(sub);
-				}
 			}
 		}
 		return result;
