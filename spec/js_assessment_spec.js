@@ -159,4 +159,59 @@ describe('Function.prototype', function () {
 			expect(sum.curry(3)(4)(20)(6)).toEqual(30);
     });
   });
+
+  describe('myCall', function() {
+    var Cat;
+    var sally, markov, curie;
+
+    beforeEach(function () {
+      Cat = function Cat (name) {
+        this.name = name;
+      };
+
+      Cat.prototype.sayHello = function () {
+        return this.name + " says hello!";
+      };
+
+      Cat.prototype.greetOne = function (otherCat) {
+        return this.name + " says hello to " + otherCat.name;
+      };
+
+      Cat.prototype.greetTwo = function (otherCat1, otherCat2) {
+        return this.name + " says hello to " + otherCat1.name + " and " +
+          otherCat2.name;
+      };
+
+      sally = new Cat("Sally");
+      markov = new Cat("Markov");
+      curie = new Cat("Curie");
+    });
+
+    it("should call and execute the function on the context", function () {
+      expect(sally.sayHello.myCall(sally)).toEqual("Sally says hello!");
+    });
+
+    it("should call the function on the context with an argument", function () {
+      expect(curie.greetOne.myCall(curie, sally)).toEqual("Curie says hello to Sally");
+    });
+
+    it("should call the function with multiple arguments", function () {
+      expect(curie.greetTwo.myCall(curie, sally, markov))
+        .toEqual("Curie says hello to Sally and Markov");
+    });
+
+    it("should not call bind", function () {
+      spyOn(sally.sayHello, "bind");
+      sally.sayHello.myCall(sally);
+      expect(sally.sayHello.bind).not.toHaveBeenCalled();
+    });
+
+    it("should not call call", function () {
+      spyOn(sally.sayHello, "call");
+      sally.sayHello.myCall(sally);
+      expect(sally.sayHello.call).not.toHaveBeenCalled();
+    });
+
+
+  });
 });

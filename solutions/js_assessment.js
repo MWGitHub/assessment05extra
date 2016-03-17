@@ -364,4 +364,10 @@
     this.prototype = new Surrogate();
     this.prototype.constructor = this;
   };
+
+  //write a version of myCall without using bind
+  Function.prototype.myCall = function (obj) {
+    var args = [].slice.apply(arguments, [1]);
+    return this.apply(obj, args);
+  };
 })();
