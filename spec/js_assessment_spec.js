@@ -66,16 +66,71 @@ describe("Array.prototype", function () {
   });
 
   describe("twoSum", function() {
-    it('should find pairs where sum is 0', function() {
-      expect([-1, 0, 2, -2, 1].twoSum()).toEqual([[0, 4], [2, 3]]);
+    it('should find a pair where the sum is 0 when no target', function() {
+			expect([5, 1, -7, -5].twoSum(0)).toEqual([[0, 3]]);
     });
+
+		it("returns positions of pairs that add to other targets", function () {
+	    expect([2, 1, 4, -2].twoSum(5)).toEqual([[1, 2]]);
+	  });
+
+	  it("finds multiple pairs", function () {
+	    expect([5, -1, -5, 1].twoSum(0)).toEqual([[0, 2], [1, 3]]);
+	  });
+
+	  it("finds pairs with same element", function () {
+	    expect([5, -5, -5].twoSum(0)).toEqual([[0, 1], [0, 2]]);
+	  });
+
+	  it("returns [] when no pair is found", function () {
+	    expect([5, 5, 3, 1].twoSum(7)).toEqual([]);
+	  });
+
+	  it("won't find spurious target pairs", function () {
+	    expect([0, 1, 2, 3].twoSum(0)).toEqual([]);
+	  });
   });
 
   describe('recursiveSum', function() {
     it("should sum numbers", function() {
-      expect([1,2,3,4].recursiveSum()).toEqual(10);
+      expect([1, 2, 3, 4].recursiveSum()).toEqual(10);
     });
+
+		it("should call itself", function () {
+			var arr = [1, 2, 3, 4];
+			spyOn(arr, "recursiveSum");
+			arr.recursiveSum();
+			expect(arr.recursiveSum).toHaveBeenCalled();
+		});
   });
+
+	describe('myFlatten', function () {
+		var array = ["a", "b", ["c", "d", ["e"]]];
+
+	  it("does not modify the original array", function () {
+	    array.myFlatten();
+
+	    expect(array).toEqual(["a", "b", ["c", "d", ["e"]]]);
+	  });
+
+	  describe("when called with no level specified", function () {
+	    it("recursively flattens all nested arrays", function () {
+	      expect(array.myFlatten()).toEqual(["a", "b", "c", "d", "e"]);
+	    });
+	  });
+
+	  describe("when called with level = 0", function () {
+	    it("does not flatten the array", function () {
+	      expect(array.myFlatten(0)).toEqual(["a", "b", ["c", "d", ["e"]]]);
+	    });
+	  });
+
+	  describe("when called with level = 1", function () {
+	    it("flattens arrays nested one level deep", function () {
+	      expect(array.myFlatten(1)).toEqual(["a", "b", "c", "d", ["e"]]);
+	    });
+	  });
+	});
 
   describe('bsearch', function() {
     it("should find the index of a given number", function(){
@@ -148,6 +203,26 @@ describe('String.prototype', function () {
       expect('cat'.substrings()).toEqual(["c", "ca", "cat", "a", "at", "t"]);
     });
   });
+
+	describe("shuffledSentenceDetector", function () {
+	  it("can detect a shuffled sentence", function () {
+	    sentence1 = "the cat ate the rat";
+	    sentence2 = "the rat ate the cat";
+	    expect(sentence1.shuffledSentenceDetector(sentence2)).toEqual(true);
+	  });
+
+	  it("doesn't return false positives", function () {
+	    sentence1 = "the cat ate the rat";
+	    sentence2 = "the rat ate a cat";
+	    expect(sentence1.shuffledSentenceDetector(sentence2)).toEqual(false);
+	  });
+
+	  it("partial matches don't cause a false positive", function () {
+	    sentence1 = "the cat ate the rat";
+	    sentence2 = "the rat ate cat";
+	    expect(sentence1.shuffledSentenceDetector(sentence2)).toEqual(false);
+	  });
+	});
 });
 
 describe('Function.prototype', function () {

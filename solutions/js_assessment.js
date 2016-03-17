@@ -74,11 +74,14 @@
     return uniqueArray;
   };
 
-  Array.prototype.twoSum = function() {
+  Array.prototype.twoSum = function(target) {
+		if (target === undefined) {
+			target = 0;
+		}
     var result = [];
     for (var i = 0; i < this.length - 1; ++i) {
       for (var j = i + 1; j < this.length; ++j) {
-        if (this[i] + this[j] === 0) {
+        if (this[i] + this[j] === target) {
           result.push([i, j]);
         }
       }
@@ -90,6 +93,25 @@
     if (this.length === 0) return 0;
     return this.pop() + this.recursiveSum();
   };
+
+	Array.prototype.myFlatten = function (level) {
+		if (level === 0) return this;
+
+		var result = [];
+		for (var i = 0; i < this.length; i++) {
+			var el = this[i];
+			if (el instanceof Array) {
+				if (level !== undefined) {
+					result = result.concat(this[i].myFlatten(level - 1));
+				} else {
+					result = result.concat(this[i].myFlatten());
+				}
+			} else {
+				result.push(el);
+			}
+		}
+		return result;
+	};
 
 	Array.prototype.bsearch = function (val) {
     if (this.length === 0) return null;
@@ -295,6 +317,10 @@
     }
     return slice;
   };
+
+	String.prototype.shuffledSentenceDetector = function(otherSentence) {
+		return this.split('').sort().join('') === otherSentence.split('').sort().join('');
+	};
 
   // write Array.prototype.myReduce (analogous to Ruby's Array#inject).
   Array.prototype.myReduce = function(callback) {
