@@ -25,16 +25,6 @@ describe("Array.prototype", function () {
     });
   });
 
-  describe("myInject", function() {
-    it('should reduce the array', function() {
-      var func = function(acc, el) {
-        return acc + el;
-      };
-      var sum = [1, 2, 3, 4].myInject(func);
-      expect(sum).toEqual(10);
-    });
-  });
-
   describe("myCount", function() {
     it('should count the number of items in an object', function() {
       expect([1,2,3,4,5].myCount()).toEqual(5);
@@ -94,32 +84,19 @@ describe("Array.prototype", function () {
     });
   });
 
-  describe("quickSort", function () {
-    it("should sort an array", function () {
-      expect([5, 3, 6, 8, 9, 4, 3, 1].quickSort(function (pivotEl, el) {
-        if (el > pivotEl) {
-          return -1;
-        } else if (el < pivotEl) {
-          return 1;
-        } else {
-          return 0;
-        }
-      })).toEqual([9, 8, 6, 5, 4, 3, 3, 1]);
-    });
-
-    it("should sort an array without a comparator given", function () {
-      expect([5, 3, 6, 8, 9, 4, 3, 1].quickSort()).
-        toEqual([1, 3, 3, 4, 5, 6, 8, 9]);
-    });
-  });
-
-  describe('Subsets', function() {
+  describe('subsets', function() {
     it('should return subsets', function() {
       expect([1, 2, 3].subsets()).toEqual(
         [[], [1], [2], [1, 2], [3], [1, 3], [2, 3], [1, 2, 3]]
       );
     });
   });
+
+	describe('mergeSort', function() {
+		it('should sort an array', function() {
+      expect([5, 6, 1, 2, 4].mergeSort()).toEqual([1, 2, 4, 5, 6]);
+    });
+	});
 });
 
 describe("Assessment", function () {
@@ -161,6 +138,14 @@ describe("Assessment", function () {
         [25, 25, 25, 10, 10, 1, 1, 1]
       );
       expect(Assessment.makeChange(14, [10, 7, 1])).toEqual([7, 7]);
+    });
+  });
+});
+
+describe('String.prototype', function () {
+	describe('substrings', function() {
+    it("should find the substrings", function() {
+      expect('cat'.substrings()).toEqual(["c", "ca", "cat", "a", "at", "t"]);
     });
   });
 });
