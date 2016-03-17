@@ -171,6 +171,20 @@
     return merge(left, right);
   };
 
+	Array.prototype.dups = function () {
+		var result = {};
+		var i;
+		for (i = 0; i < this.length; i++) {
+			var el = this[i];
+			result[el] = result[el] || [];
+			result[el].push(i);
+		}
+		for (var key in result) {
+			if (result[key].length === 1) delete result[key];
+		}
+		return result;
+	};
+
   Assessment.myTranspose = function (array) {
     var result = [];
 
@@ -285,6 +299,38 @@
     }
     return result;
   };
+
+	String.prototype.symmetricSubstrings = function () {
+		var result = [];
+		var minLength = 3;
+		for (var start = 0; start <= this.length - minLength; start++) {
+			for (var end = start + minLength - 1; end < this.length; end++) {
+				var sub = this.substring(start, end + 1);
+				var opposite = '';
+				for (var i = sub.length - 1; i >= 0; i--) {
+					opposite += sub[i];
+				}
+				if (sub === opposite) result.push(sub);
+			}
+		}
+		return result;
+	};
+
+	String.prototype.substringAnagrams = function () {
+		var result = [];
+		var minLength = 3;
+		for (var start = 0; start < this.length - minLength; start++) {
+			for (var end = start + minLength; end < this.length; end++) {
+				var sub = this.substring(start, end + 1);
+				console.log(sub);
+				for (var innerEnd = end; innerEnd < this.length; innerEnd++) {
+					var opposite = this.substring(innerEnd, end + sub.length);
+					if (sub === opposite) result.push(sub);
+				}
+			}
+		}
+		return result;
+	};
 
 	Function.prototype.curry = function (length) {
 		var fn = this;

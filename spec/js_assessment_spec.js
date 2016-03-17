@@ -147,8 +147,8 @@ describe("Array.prototype", function () {
     });
   });
 
-	describe('mergeSort', function() {
-		it('should sort an array', function() {
+	describe('mergeSort', function () {
+		it('should sort an array', function () {
       expect([5, 6, 1, 2, 4].mergeSort()).toEqual([1, 2, 4, 5, 6]);
     });
 
@@ -158,6 +158,24 @@ describe("Array.prototype", function () {
 			arr.mergeSort();
 			expect(arr.mergeSort).toHaveBeenCalled();
 		});
+	});
+
+	describe('dups', function () {
+		it("solves a simple example", function() {
+	    expect([1, 3, 0, 1].dups()).toEqual({ 1: [0, 3] });
+	  });
+
+	  it("finds two dups", function() {
+	    expect([1, 3, 0, 3, 1].dups()).toEqual({ 1: [0, 4], 3: [1, 3] });
+	  });
+
+	  it("finds multi-dups", function() {
+	    expect([1, 3, 4, 3, 0, 3].dups()).toEqual({ 3: [1, 3, 5] });
+	  });
+
+	  it("returns {} when no dups found", function() {
+	    expect([1, 3, 4, 5].dups()).toEqual({});
+	  });
 	});
 });
 
@@ -258,6 +276,24 @@ describe('String.prototype', function () {
 	    sentence1 = "the cat ate the rat";
 	    sentence2 = "the rat ate cat";
 	    expect(sentence1.shuffledSentenceDetector(sentence2)).toEqual(false);
+	  });
+	});
+
+	describe("symmetricSubstrings", function () {
+	  it("handles a simple example", function () {
+	    expect("aba".symmetricSubstrings().indexOf('aba') >= 0).toEqual(true);
+	  });
+
+	  it("handles two substrings", function () {
+			var result = "aba1cdc".symmetricSubstrings();
+	    expect(result.indexOf('aba') >= 0).toEqual(true);
+			expect(result.indexOf('cdc') >= 0).toEqual(true);
+	  });
+
+	  it("handles nested substrings", function () {
+			var result = "xabax".symmetricSubstrings();
+	    expect(result.indexOf('aba') >= 0).toEqual(true);
+			expect(result.indexOf('xabax') >= 0).toEqual(true);
 	  });
 	});
 });
