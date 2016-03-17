@@ -248,6 +248,34 @@
 	  return bestChange;
   };
 
+	Assessment.primes = function (target) {
+		function isPrime(num) {
+			if (num <= 1) return false;
+			if (num === 2) return true;
+			for (var i = 2; i <= Math.floor(Math.sqrt(num)); i++) {
+				if (num % i === 0) return false;
+			}
+			return true;
+		}
+
+		var results = [];
+		var counter = 2;
+		while (results.length < target) {
+			if (isPrime(counter)) results.push(counter);
+			counter++;
+		}
+		return results;
+	};
+
+	Assessment.factorialsRec = function (n) {
+		if (n === 0) return [];
+		if (n === 1) return [1];
+
+		var result = Assessment.factorialsRec(n - 1);
+		result.push(result[result.length - 1] * (n - 1));
+		return result;
+	};
+
 	String.prototype.substrings = function () {
     var result = [];
     for (var i = 0; i < this.length; ++i) {

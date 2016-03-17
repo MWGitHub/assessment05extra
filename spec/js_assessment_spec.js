@@ -151,6 +151,13 @@ describe("Array.prototype", function () {
 		it('should sort an array', function() {
       expect([5, 6, 1, 2, 4].mergeSort()).toEqual([1, 2, 4, 5, 6]);
     });
+
+		it('should call itself recursively', function () {
+			var arr = [3, 1, 4];
+			spyOn(arr, "mergeSort");
+			arr.mergeSort();
+			expect(arr.mergeSort).toHaveBeenCalled();
+		});
 	});
 });
 
@@ -195,6 +202,36 @@ describe("Assessment", function () {
       expect(Assessment.makeChange(14, [10, 7, 1])).toEqual([7, 7]);
     });
   });
+
+	describe('primes', function () {
+		it('returns first five primes in order', function () {
+			expect(Assessment.primes(5)).toEqual([2, 3, 5, 7, 11]);
+		});
+
+		it('returns an empty array when asked for zero primes', function () {
+			expect(Assessment.primes(0)).toEqual([]);
+		});
+	});
+
+	describe('factorialsRec', function () {
+	  it("returns first factorial number", function () {
+	    expect(Assessment.factorialsRec(1)).toEqual([1]);
+	  });
+
+	  it("returns first two factorial numbers", function () {
+	    expect(Assessment.factorialsRec(2)).toEqual([1, 1]);
+	  });
+
+	  it("returns many factorials numbers", function () {
+	    expect(Assessment.factorialsRec(6)).toEqual([1, 1, 2, 6, 24, 120]);
+	  });
+
+		it('should call itself recursively', function () {
+			spyOn(Assessment, "factorialsRec");
+			Assessment.factorialsRec(5);
+			expect(Assessment.factorialsRec).toHaveBeenCalled();
+		});
+	});
 });
 
 describe('String.prototype', function () {
