@@ -237,6 +237,26 @@
 		return result;
 	};
 
+	Array.prototype.myReverse = function () {
+		var result = [];
+		for (var i = 0; i < this.length; i++) {
+			result.push(this[this.length - 1 - i]);
+		}
+		return result;
+	};
+
+	Array.prototype.myJoin = function (sep) {
+		var s = sep || '';
+		var out = '';
+		for (var i = 0; i < this.length; i++) {
+			out += this[i];
+			if (i !== this.length - 1) {
+				out += s;
+			}
+		}
+		return out;
+	};
+
   Assessment.myTranspose = function (array) {
     var result = [];
 

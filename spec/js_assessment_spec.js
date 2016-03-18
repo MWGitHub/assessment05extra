@@ -238,6 +238,26 @@ describe("Array.prototype", function () {
 			expect(arr.myRotate(-2)).toEqual(["c", "d", "a", "b"]);
 		});
 	});
+
+	describe('myReverse', function () {
+		it('should reverse an array', function () {
+			expect(['a', 'b', 'c'].myReverse()).toEqual(['c', 'b', 'a']);
+		});
+
+		it('should reverse an array with a single element', function () {
+			expect([1].myReverse()).toEqual([1]);
+		});
+	});
+
+	describe('myJoin', function () {
+		it('should join an array with empty if nothing given', function () {
+			expect(['a', 'b', 'c', 'd'].myJoin()).toEqual('abcd');
+		});
+
+		it('should join an array with the given separator', function () {
+			expect(['a', 'b', 'c', 'd'].myJoin('$')).toEqual('a$b$c$d');
+		});
+	});
 });
 
 describe("Assessment", function () {
