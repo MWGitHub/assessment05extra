@@ -133,10 +133,18 @@ describe("Array.prototype", function () {
 	});
 
   describe('bsearch', function() {
-    it("should find the index of a given number", function(){
+    it("should find the index of a given number at mid", function () {
       expect([2, 4, 6, 8, 10].bsearch(6)).toEqual(2);
-      expect([1, 2, 3, 4, 5, 6].bsearch(0)).toEqual(null);
     });
+
+		it('should find the index of a given number', function () {
+			expect([2, 4, 6, 8, 10].bsearch(4)).toEqual(1);
+			expect([2, 4, 6, 8, 10].bsearch(8)).toEqual(3);
+		});
+
+		it ('should return null if the target is not found', function () {
+			expect([1, 2, 3, 4, 5, 6].bsearch(0)).toEqual(null);
+		});
   });
 
   describe('subsets', function() {
