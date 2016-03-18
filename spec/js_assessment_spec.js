@@ -257,6 +257,13 @@ describe("Array.prototype", function () {
 		it('should join an array with the given separator', function () {
 			expect(['a', 'b', 'c', 'd'].myJoin('$')).toEqual('a$b$c$d');
 		});
+
+		it('should not call join', function () {
+			var arr = [1, 2, 3];
+			spyOn(arr, 'join');
+			arr.myJoin();
+			expect(arr.join).not.toHaveBeenCalled();
+		});
 	});
 });
 
