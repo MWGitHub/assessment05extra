@@ -193,6 +193,50 @@
 		return result;
 	};
 
+	Array.prototype.myZip = function () {
+		var result = [];
+		var i;
+		for (i = 0; i < this.length; i++) {
+			result.push([this[i]]);
+		}
+
+		for (var row = 0; row < this.length; row++) {
+			for (var col = 0; col < arguments.length; col++) {
+				var arg = arguments[col];
+				var el = arg[row];
+				if (el === undefined || el === null) {
+					result[row][col + 1] = null;
+				} else {
+					result[row][col + 1] = el;
+				}
+			}
+		}
+		return result;
+	};
+
+	Array.prototype.myRotate = function (num) {
+		var result = [].concat(this);
+		var el;
+		var rotations = num;
+		var i = 0;
+		if (num === undefined) {
+			rotations = 1;
+		}
+
+		if (rotations > 0) {
+			for (i = 0; i < rotations; i++) {
+				el = result.shift();
+				result.push(el);
+			}
+		} else if (rotations < 0) {
+			for (i = 0; i > rotations; i--) {
+				el = result.pop();
+				result.unshift(el);
+			}
+		}
+		return result;
+	};
+
   Assessment.myTranspose = function (array) {
     var result = [];
 

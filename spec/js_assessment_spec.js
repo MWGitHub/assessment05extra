@@ -188,6 +188,56 @@ describe("Array.prototype", function () {
 			})).toEqual([1, 2, 3]);
 		});
 	});
+
+	describe('myZip', function () {
+		var a = [4, 5, 6];
+		var b = [7, 8, 9];
+
+		it('zips an array with one argument', function () {
+			var result = [1, 2, 3].myZip(a);
+			expect(result).toEqual([[1, 4], [2, 5], [3, 6]]);
+		});
+
+		it('zips a smaller array with a larger one', function () {
+			expect([1].myZip(a)).toEqual([[1, 4]]);
+		});
+
+		it('zips a larger array with a smaller one', function () {
+			expect(a.myZip([1, 2], [8])).toEqual(
+				[[4, 1, 8], [5, 2, null], [6, null, null]]
+			);
+		});
+
+		it('zips an array with many arguments', function () {
+			var c = [10, 11, 12];
+			var d = [13, 14, 15];
+			var result = [1, 2, 3].myZip(a, b, c, d);
+			expect(result).toEqual([
+				[1, 4, 7, 10, 13],
+				[2, 5, 8, 11, 14],
+				[3, 6, 9, 12, 15]
+			]);
+		});
+	});
+
+	describe('myRotate', function () {
+		var arr;
+		beforeEach(function () {
+			arr = ["a", "b", "c", "d"];
+		});
+
+		it('rotates by one element without parameters', function () {
+			expect(arr.myRotate()).toEqual(["b", "c", "d", "a"]);
+		});
+
+		it('rotates by the given number of elements', function () {
+			expect(arr.myRotate(15)).toEqual(["d", "a", "b", "c"]);
+		});
+
+		it('rotates in the opposite direction', function () {
+			expect(arr.myRotate(-2)).toEqual(["c", "d", "a", "b"]);
+		});
+	});
 });
 
 describe("Assessment", function () {
