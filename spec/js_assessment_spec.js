@@ -67,7 +67,7 @@ describe("Array.prototype", function () {
 
   describe("twoSum", function() {
     it('should find a pair where the sum is 0 when no target', function() {
-			expect([5, 1, -7, -5].twoSum(0)).toEqual([[0, 3]]);
+			expect([5, 1, -7, -5].twoSum()).toEqual([[0, 3]]);
     });
 
 		it("returns positions of pairs that add to other targets", function () {
